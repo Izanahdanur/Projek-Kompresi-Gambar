@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kompresi Gambar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="p-5">
+    <div class="container">
+        <h2 class="mb-4 text-center">Kompresi Gambar</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Upload Gambar</label>
+                <input type="file" class="form-control" name="image" required>
+            </div>
+            <div class="form-group">
+                <label>Skala Resolusi (1% - 100% dari ukuran asli)</label>
+                <input type="number" class="form-control" name="quality" min="1" max="100" value="50" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Kompres</button>
+        </form>
+
+        {% if input_image %}
+        <hr>
+        <h4>Hasil:</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Gambar Asli:</strong></p>
+                <img src="/{{ input_image }}" class="img-fluid mb-2">
+                <p><strong>Runtime Kompresi:</strong> {{ runtime }} detik</p>
+                <p><strong>Ukuran File Asli:</strong> {{ original_size }} KB</p>
+                <p><strong>Perubahan Pixel:</strong> {{ pixel_change }}%</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Gambar Terkompresi:</strong></p>
+                <img src="/{{ output_image }}" class="img-fluid mb-2">
+                <p><strong>Ukuran File Kompresi:</strong> {{ compressed_size }} KB</p>
+                <a href="/download/{{ download_link }}" class="btn btn-success">Download</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
